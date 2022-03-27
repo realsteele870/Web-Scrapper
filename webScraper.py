@@ -1,9 +1,17 @@
-import requests
+import requests, statistics
 from bs4 import BeautifulSoup
 
 searchItem= input("What ebay item to search?: ")
 
-searchItem= input("What ebay item to search?: ")
+def Average(lst):
+    return sum(lst)/len(lst)
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 searchItem = searchItem.replace(" ","+")
 
@@ -16,9 +24,7 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
 results = soup.find(id="srp-river-main")
-
-avg_price = 0
-items = 0
+priceList = []
 flag =1
 item_elements = results.find_all("div", class_="s-item__info clearfix")
 for item_element in item_elements:
@@ -27,12 +33,20 @@ for item_element in item_elements:
         price_element = item_element.find("span", class_="s-item__price")
         price_element =price_element.text.strip()
         realprice=price_element[1:]
-        realprice=float(realprice)
-        avg_price=avg_price + realprice
+        if is_number(realprice):
+            realprice=float(realprice)
+            priceList.append(realprice)
+        
         print(title_element.text.strip())
         print(realprice)
-        items= items+1
+        
     flag = 0
-realAverage= avg_price/items
-print("average price is "+str(round(realAverage,2)))
+
+
+print("average price is: "+ str(round(Average(priceList),2)))
+print("median of price is: "+ str(statistics.median(priceList)))
+
+
+
+
 
