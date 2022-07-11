@@ -5,7 +5,7 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-pw="Tomnook21@1960870"
+pw="123PASS@rd"
 db ="gpu"
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
