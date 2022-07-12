@@ -5,7 +5,7 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-pw="123PASS@rd"
+pw="1234"
 db ="gpu"
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -22,7 +22,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 
     return connection
 
-connection = create_db_connection("localhost", "root", pw, db)
+connection = create_db_connection("34.136.219.87", "root", pw, db)
 
 def execute_query(connection, query):
     cursor = connection.cursor()
@@ -124,10 +124,10 @@ def webScrape(searchItem):
 
     if(mean >= 50 and median >=50 and cardSelect.get()==1 ):
         create_gpu_insert = """
-        INSERT INTO gpuprices(gpu_name, gpu_price)
+        INSERT INTO GpuPrices(gpu_name, gpu_price)
         VALUES("""+'"'+ firstString+'"'+", "+str(mean)+""");"""
         print(create_gpu_insert)
-        connection = create_db_connection("localhost", "root", pw, db) # Connect to the Database
+        connection = create_db_connection("34.136.219.87", "root", pw, db) # Connect to the Database
         execute_query(connection, create_gpu_insert) # Execute our defined query
     pricelist=[]
     

@@ -1,7 +1,8 @@
+from difflib import diff_bytes
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-pw="Tomnook21@1960870"
+pw="1234"
 db ="gpu"
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -18,7 +19,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 
     return connection
 
-connection = create_db_connection("localhost", "root", pw, db)
+connection = create_db_connection("34.136.219.87", "root", pw,db)
 
 
 def create_database(connection, query):
@@ -51,6 +52,6 @@ CREATE TABLE GpuPrices (
   );
  """
 
-connection = create_db_connection("localhost", "root", pw, db) # Connect to the Database
+connection = create_db_connection("34.136.219.87", "root", pw, db) # Connect to the Database
 execute_query(connection, create_teacher_table) # Execute our defined query
 
